@@ -1,4 +1,5 @@
 import sys
+import wt_find_file
 import wt_tail
 
 
@@ -6,5 +7,5 @@ def callback(line):
     sys.stdout.write(line)
 
 
-path = 'C:\\Users\\bryan\\Documents\\EVE\\logs\\Chatlogs\\delve.imperium_20170129_041551.txt'
+path = wt_find_file.find("delve.imperium")
 wt_tail.tail_file(path, callback)

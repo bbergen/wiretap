@@ -7,6 +7,12 @@ class WiretapFileException(Exception):
 
 
 def tail_file(path, callback):
+    """
+    Opens file at the path, and tails it
+    New lines are passed to the callback
+    :param path: string
+    :param callback: function(string)
+    """
     exists = os.path.exists(path)
     if not exists:
         raise WiretapFileException("Invalid File Path")
