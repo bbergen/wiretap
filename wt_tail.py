@@ -3,6 +3,19 @@ import os
 import time
 
 
+class Tailer:
+    def __init__(self, channel):
+        self.channel = channel
+        self.running = False
+
+    def start_tail(self):
+        self.running = True
+        #TODO(bryan) implement
+
+    def stop_tail(self):
+        self.running = False
+
+
 def tail_file(path, callback):
     """
     Opens file at the path, and tails it
