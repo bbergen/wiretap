@@ -1,9 +1,6 @@
+from wt_exception import WiretapFileException
 import os
 import time
-
-
-class WiretapFileException(Exception):
-    pass
 
 
 def tail_file(path, callback):

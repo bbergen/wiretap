@@ -1,0 +1,3 @@
+
+class WiretapFileException(Exception):
+    pass
