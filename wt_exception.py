@@ -1,6 +1,9 @@
 
 class WiretapFileException(Exception):
-    """ Used to abstract low level IO errors when configuring Wiretap Channels and Tailers """
+    """
+    Used to abstract low level IO errors
+    when configuring Wiretap Channels and Tailers
+    """
     pass
 
 

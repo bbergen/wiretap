@@ -22,7 +22,7 @@ class Tailer:
 
     def start_tail(self):
         """
-        TODO(bryan) self._tail_file() should run in a seperate thread so this thread is non-blocking
+        TODO(bryan) threading
         TODO(bryan) error checking on channel loading
         Starts the tailing of the configured channel
         :return: void
@@ -58,10 +58,9 @@ class Tailer:
         :return: void
         """
         path = self.channel.get_file()
-        file = open(path, encoding='utf-16', errors='ignore')  # Eve chat logs are in UTF-16
+        file = open(path, encoding='utf-16', errors='ignore')  # logs are UTF-16
         lines = self._fetch(file)
         for line in lines:
-            # line = line.rstrip()
             self.writer.write(line)
 
     def _fetch(self, file):
@@ -76,7 +75,7 @@ class Tailer:
             if not line:
                 time.sleep(self.frequency)
                 continue
-            yield line
+            yield line.rstrip('\n')
 
 
 

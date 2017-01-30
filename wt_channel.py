@@ -1,6 +1,38 @@
 import datetime
 import getpass
 import os
+import threading
+
+from wt_tailer import Tailer
+
+
+class ChannelWriter:
+
+    _LOCK = threading.Lock()
+
+    def __init__(self, name):
+        self.name = name
+
+    def write(self, line):
+        self._LOCK.acquire()
+        try:
+            print(
+                "["
+                + self.name
+                + "]: "
+                + line)
+        finally:
+            self._LOCK.release()
+
+
+class ChannelRunner:
+    def __init__(self, channel):
+        self.channel = channel
+        self.writer = ChannelWriter(channel.channel_name)
+
+    def run(self):
+        t = Tailer(self.channel, self.writer)
+        t.start_tail()
 
 
 class Channel:
@@ -34,7 +66,8 @@ class Channel:
 
 def list_channels():
     """
-    TODO(bryan) search previous day if none found for current day, as eve may be open across 00:00:00 UTC
+    TODO(bryan) search previous day if none found for current day,
+        as eve may be open across 00:00:00 UTC
 
     Checks the log directory for today's chat logs and returns
     a map of Channel objects mapped to their channel name
