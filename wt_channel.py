@@ -4,6 +4,9 @@ import os
 
 
 class Channel:
+    """
+    Abstraction of an Eve Online Chat Channel
+    """
     def __init__(self):
         self.dir = ""
         self.file_name = ""
