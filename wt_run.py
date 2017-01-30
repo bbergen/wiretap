@@ -2,7 +2,7 @@ import logging
 import sys
 
 import wt_channel
-from wt_trailer import Tailer
+from wt_tailer import Tailer
 
 
 def callback(line):
