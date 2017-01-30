@@ -7,6 +7,7 @@ from wt_tailer import Tailer
 
 
 class ChannelWriter:
+    """ Simple thread safe Writer that writes to stdout """
 
     _LOCK = threading.Lock()
 
@@ -14,6 +15,7 @@ class ChannelWriter:
         self.name = name
 
     def write(self, line):
+        """ writes lines to stdout, prepended with channel name """
         self._LOCK.acquire()
         try:
             print(
@@ -26,11 +28,14 @@ class ChannelWriter:
 
 
 class ChannelRunner:
+    """ Simple Runner that starts the tailing of a configured Channel """
+
     def __init__(self, channel):
         self.channel = channel
         self.writer = ChannelWriter(channel.channel_name)
 
     def run(self):
+        """ Starts tailing the Channel """
         t = Tailer(self.channel, self.writer)
         t.start_tail()
 

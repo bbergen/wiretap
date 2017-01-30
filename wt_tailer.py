@@ -22,7 +22,6 @@ class Tailer:
 
     def start_tail(self):
         """
-        TODO(bryan) threading
         TODO(bryan) error checking on channel loading
         Starts the tailing of the configured channel
         :return: void
@@ -33,7 +32,6 @@ class Tailer:
 
     def stop_tail(self):
         """
-        TODO(bryan) pointless until start_tail is properly threaded.
         Stops the tailing of the configured channel
         :return: void
         """
