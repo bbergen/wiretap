@@ -1,30 +1,9 @@
 import datetime
 import getpass
 import os
-import threading
 
 from wt_tailer import Tailer
-
-
-class ChannelProcessor:
-    """ Simple thread safe Processor that writes to stdout """
-
-    _LOCK = threading.Lock()
-
-    def __init__(self, name):
-        self.name = name
-
-    def process(self, line):
-        """ writes lines to stdout, prepended with channel name """
-        self._LOCK.acquire()
-        try:
-            print(
-                "["
-                + self.name
-                + "]: "
-                + line)
-        finally:
-            self._LOCK.release()
+from wt_processor import Processor
 
 
 class ChannelRunner:
@@ -32,7 +11,7 @@ class ChannelRunner:
 
     def __init__(self, channel):
         self.channel = channel
-        self.writer = ChannelProcessor(channel.channel_name)
+        self.writer = Processor(channel.channel_name)
 
     def run(self):
         """ Starts tailing the Channel """
