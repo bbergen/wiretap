@@ -9,14 +9,14 @@ class Tailer:
     Used for Tailing Eve Online Chat Channels
     See wt_channel.Channel
     """
-    def __init__(self, channel, writer):
+    def __init__(self, channel, processor):
         """
         Configures a Tailer instance
         :param channel: wt_channel.Channel fully configured
-        :param writer: object responsible for writing our the read lines
+        :param processor: object responsible for processing the read lines
         """
         self.channel = channel
-        self.writer = writer
+        self.processor = processor
         self.frequency = 1
         self.running = False
 
@@ -59,7 +59,7 @@ class Tailer:
         file = open(path, encoding='utf-16', errors='ignore')  # logs are UTF-16
         lines = self._fetch(file)
         for line in lines:
-            self.writer.write(line)
+            self.processor.process(line)
 
     def _fetch(self, file):
         """

@@ -6,15 +6,15 @@ import threading
 from wt_tailer import Tailer
 
 
-class ChannelWriter:
-    """ Simple thread safe Writer that writes to stdout """
+class ChannelProcessor:
+    """ Simple thread safe Processor that writes to stdout """
 
     _LOCK = threading.Lock()
 
     def __init__(self, name):
         self.name = name
 
-    def write(self, line):
+    def process(self, line):
         """ writes lines to stdout, prepended with channel name """
         self._LOCK.acquire()
         try:
@@ -32,7 +32,7 @@ class ChannelRunner:
 
     def __init__(self, channel):
         self.channel = channel
-        self.writer = ChannelWriter(channel.channel_name)
+        self.writer = ChannelProcessor(channel.channel_name)
 
     def run(self):
         """ Starts tailing the Channel """
