@@ -10,3 +10,8 @@ class WiretapFileException(Exception):
 class ChannelNotFoundException(Exception):
     """ Used when a channel does not exist """
     pass
+
+
+class ChannelProcessException(Exception):
+    """ Used when there is an error processing the channel feed """
+    pass
